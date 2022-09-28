@@ -6,7 +6,7 @@
 
 # 주요 단축키
 # - script 실행 : ctrl+Enter, ctrl+R
-# - script 저장 : ctrl+s, ctrl+sht+s(전체파일저장)
+# - script 저장 : ctrl+s, ctrl+alt+s(전체파일저장)
 
 # Library 등록.
 # - C:/Program Files/R/R-4.1.2/etc/Rprofile.site 파일에 .libPaths("C:/myRLib/Library") 추가 혹은
