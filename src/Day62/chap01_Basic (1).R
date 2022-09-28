@@ -84,6 +84,7 @@ dev.off()
 
 
 ## 4. 변수와 자료형
+#변수는 변하는 값 + 메모리 할당을 요청하는 방법
 # 변수 사용 예
 age <- 25
 age
@@ -91,12 +92,16 @@ age <- 35
 age
 
 # 변수.멤버  형태로 변수 선언 예
-
-
 var1 <- 50
 var2 <- 100
 
-# 스칼라 변수 사용 예
+goods.model <- "lg-320" #상품 모델명
+goods.name <- "냉장고" 
+goods.price <- 850000 
+goods.desc <- "동금 최고 품질/사양"
+
+
+# 스칼라 변수 사용 예( 스칼라 : 하나의 변수에 하나의 값만 담긴 변수)
 name <- "홍길동"
 name
 
@@ -111,84 +116,142 @@ boolean <- 3.14
 boolean
 
 # 자료형 확인
+is.numeric(int) #자료형이 숫자인지 확인 T/F로 결과값반환
+is.integer(age) # F 로 반환 : 정수의 값도 R은 부동소수점으로 관리
+is.double(int) # T로 반환
 
+castInt <- as.integer(int) #as는 형변환
+is.integer(castInt) #T를 반환. 
 
+is.numeric(double) #T
+is.double(double) #T
 
+is.character(string) #T
+is.character(age) #F
+is.character("double") #T
 
-# 문자 원소를 숫자 원소로 형변환
+ 
+# 문자 원소를 숫자 원소로 형변환(두개 이상의 값이 있으면 백터자료)
 x <- c(1, 2, 3)
 x
+# op -> [1] 1 2 3
 
 # 숫자 원소를 문자 원소로 형변환
 y <- c(1, 2, "3")
 y
-
+# op -> "1" "2" "3"
+# c는 서로 다른 자료형은 저장할 수 없다. 숫자와 문자형에 관해서 자동 캐스팅.
+# R뿐만이 아닌 다른 프로그럼 언어들도 동일
 result <- x * 3
 result
-
+# op -> [1] 3 6 9
 
 result <- y * 5 
+# op -> Error in y * 5 : non-numeric argument to binary operator
 
 result <- as.integer(y) * 5
 result
-
+# op -> [1]  5 10 15
 
 # 복소수형 자료 생성과 형변환
 z <- 5.3 - 3i
 Re(z)
+# op -> [1] 5.3
 Im(z)
+# op -> [1] -3
 is.complex(z) # TRUE
-as.complex(5.3) # 5.3+0i
+as.complex(5.3) # 5.3+0i 강제 복소수로 형변환
 
 # 스칼라 변수의 자료형
 mode(int)
+# op -> [1] "numeric"
 mode(string)
+# op -> [1] "character"
 mode(boolean)
+# op -> [1] "logical"
 
 # 문자 벡터와 그래프 생성
 gender <- c('man', 'woman', 'woman', 'man', 'man')
 gender
+# op -> [1] "man"   "woman" "woman" "man"   "man"  
 
 mode(gender)
+# op -> [1] "character"
 class(gender)
+# op -> [1] "character"
 
 plot(gender)
+# op -> Error
 
 # 요인형 변환
 # as.factor() 함수 이용 범주(요인)형 변환
 Ngender <- as.factor(gender)
 Ngender
+# op ->
+# [1] man   woman woman man   man  
+# Levels: man woman
 table(Ngender)
+# op ->
+# Ngender
+# man woman 
+# 3     2 
 
 # Factor형 변수로 차트 그리기
 plot(Ngender)
+# op -> 사진 4-1
 mode(Ngender)
+# op -> [1] "numeric" : 빈도수로 변환이 되서 
 class(Ngender)
+# op -> [1] "factor" : class는 factor!
 is.factor(Ngender)
+# op -> [1] TRUE 
 
 # Factor Nominal 변수
 Ngender
+# op ->  factor를 출력시 결과의 모양은 다음과 같다.
+# [1] man   woman woman man   man  
+# Levels: man woman
+
 
 # factor() 함수 이용 Factor형 변환
+args(factor) #?factor
+# op -> factor에 담긴 파라미터 정보를 표시 
+# function (x = character(), levels, labels = levels, exclude = NA, 
+#           ordered = is.ordered(x), nmax = NA) 
+#   NULL
 
-
+Ogender <- factor(gender,levels = c('woman','man'),
+                    labels = c("여자","남자"), ordered = T)
+Ogender
+# op -> 우선 순위가 보일 수 있게 되었다.
+# [1] 남자 여자 여자 남자 남자
+# Levels: 여자 < 남자
 
 # 순서 없는 요인과 순서 있는 요인형 변수로 차트 그리기
-
+par(mfrow=c(1,2))
+plot(Ngender)
+plot(Ogender)
+# op -> 사진 4-2
 
 
 # 도움말 보기
 i <- sum(1, 2, 3)
 i
+# op -> [1] 6
 
 help(sum)
-?sum
+?sum #위와 결과 동일
 
 # 함수 파라메터 보기
 args(sum)
+# op ->
+# function (..., na.rm = FALSE) 
+#  NULL
 
 # 함수 사용 예제 보기
 example(sum)
 
-# 작업 공간 지정
 
+# 작업 공간 지정
+getwd() #작업 공간 확인
+setwd("C:/workspaces/RLAB/data") #작업 위치 지정
