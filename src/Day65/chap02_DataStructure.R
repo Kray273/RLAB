@@ -644,6 +644,11 @@ name <- c("홍길동","이순신","강감찬")
 pay <- c(150,250,300)
 vemp <- data.frame(No=no,Name=name,Pay=pay)
 vemp
+# op 
+#    No   Name Pay
+# 1  1 홍길동 150
+# 2  2 이순신 250
+# 3  3 강감찬 300
 class(vemp) # "data.frame"
 
 # matrix 이용 객체 생성
