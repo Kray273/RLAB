@@ -652,14 +652,29 @@ vemp
 class(vemp) # "data.frame"
 
 # matrix 이용 객체 생성
-args()
-m <- 
+args(matrix) # 구조 확인
+m <- matrix(c(1,"홍길동",150,
+              2,"이순신",250,
+              3,"강감찬",300), 3, byrow = T)
 m
-class(m)
+#op 동일한 자료형으로 저장
+#       [,1] [,2]     [,3] 
+# [1,] "1"  "홍길동" "150"
+# [2,] "2"  "이순신" "250"
+# [3,] "3"  "강감찬" "300"
 
-memp <- 
+class(m)
+#op -> [1] "matrix" "array" 
+
+memp <- data.frame(m)
 memp
+#op 데이터 프레임의 형변환이 가능.
+#    X1     X2  X3
+# 1  1 홍길동 150
+# 2  2 이순신 250
+# 3  3 강감찬 300
 class(memp)
+# op-> [1] "data.frame"
 
 # txt 파일 이용 객체 생성
 getwd()
