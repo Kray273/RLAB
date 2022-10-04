@@ -9,49 +9,92 @@
 ## 1-1. 키보드 입력
 
 # 키보드로 숫자 입력하기
-num <- 
+num <- scan()
+# 1: 10
+# 2: 20
+# 3: 30
+# 4: 
+#   Read 3 items
 num
+# [1] 10 20 30
 
 # 합계 구하기
 sum(num)
+# [1] 60
 
 # 키보드로 문자 입력하기
-name <- 
+name <- scan(what = character()) 
+# 1: 홍길동
+# 2: 이순신
+# 3: 강감친
+# 4: 
+#   Read 3 items
 name
+# [1] "홍길동" "이순신" "강감친"
 
 # 편집기 이용 데이터프레임 만들기
-df <- 
-df <- 
+df <- data.frame() #빈 데이터프레임 생성
+df <- edit(df) #입력창이 뜸.
 df
+#   name age
+# 1 hong  30
+# 2 kang  30
 
 ## 1-2. 로컬 파일 가져오기
 
 # 1) read.table() 함수 이용
 #   - 컬럼명이 없는 파일 불러오기
 getwd()
-setwd("C:/workspaces/Rwork/data")
+setwd("C:/workspaces/RLAB/data")
 
-student <- read.table()
+student <- read.table(file = "student.txt")
 student
+#    V1   V2  V3 V4
+# 1 101 hong 175 65
+# 2 201  lee 185 85
+# 3 301  kim 173 60
+# 4 401 park 180 70
 mode(student); class(student)
+# [1] "list"
+# [1] "data.frame"
 
 names(student) <- c('번호', '이름', '키', '몸무게')
 student
+#    번호 이름  키 몸무게
+# 1  101 hong 175     65
+# 2  201  lee 185     85
+# 3  301  kim 173     60
+# 4  401 park 180     70
 
 #   - 컬럼명이 있는 파일 불러오기
-student1 <- read.table()
+student1 <- read.table("student1.txt",header = T)
 student1
+#   번호 이름  키 몸무게
+# 1  101 hong 175     65
+# 2  201  lee 185     85
+# 3  301  kim 173     60
+# 4  401 park 180     70
 
 #   - 탐색기를 통해서 파일 선택하기
-student1 <- read.table()
-student1
+student1 <- read.table(file.choose(), header = T)
+student1  
+#   번호 이름  키 몸무게
+# 1  101 hong 175     65
+# 2  201  lee 185     85
+# 3  301  kim 173     60
+# 4  401 park 180     70
 
 #   - 구분자가 있는 경우(세미콜론, 탭)
-student2 <- read.table()
+student2 <- read.table("student2.txt", header = T, sep = ";")
 student2
+#    번호 이름  키 몸무게
+# 1  101 hong 175     65
+# 2  201  lee 185     85
+# 3  301  kim 173     60
+# 4  401 park 180     70
 
 #   - 결측치를 처리하여 파일 불러오기
-student3 <- read.table() 
+student3 <- read.table("student3.txt") 
 student3
 
 #   - csv 파일 형식 불러오기

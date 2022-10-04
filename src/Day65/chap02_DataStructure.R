@@ -741,28 +741,72 @@ str(df)
 # $ y: num  2 4 6 8 10
 # $ z: chr  "a" "b" "c" "d" ...
 ncol(df)
+# op -> [1] 3
 nrow(df)
+# op-> [1] 5
 df[c(2:3)]
+#op
+#    y z
+# 1  2 a
+# 2  4 b
+# 3  6 c
+# 4  8 d
+# 5 10 e
 
 # 요약 통계량 보기
 summary(df)
+#op 
+#       x           y           z            
+# Min.   :1   Min.   : 2   Length:5          
+# 1st Qu.:2   1st Qu.: 4   Class :character  
+# Median :3   Median : 6   Mode  :character  
+# Mean   :3   Mean   : 6                     
+# 3rd Qu.:4   3rd Qu.: 8                     
+# Max.   :5   Max.   :10      
 
 # 데이터프레임 자료에 함수 적용
 apply(df[,c(1,2)], 2, sum)
+#op 
+#  x  y 
+# 15 30 
 
 # 데이터프레임의 부분 객체 만들기
 x1 <- subset(df, x >= 3) # x가 3이상인 레코드 대상
 x1
+#op 
+#   x  y z
+# 3 3  6 c
+# 4 4  8 d
+# 5 5 10 e
 
 y1 <- subset(df, y <= 8) # y가 8이하인 레코드 대상
 y1
+#op
+#   x y z
+# 1 1 2 a
+# 2 2 4 b
+# 3 3 6 c
+# 4 4 8 d
+
 
 # 두 개의 조건으로 부분 객체 만들기
 xyand <- subset(df, x>=2 & y<=6)
 xyand
+#op 
+#   x y z
+# 2 2 4 b
+# 3 3 6 c
 
 xyor <- subset(df, x>=2 | y<=6)
 xyor
+#op
+#   x  y z
+# 1 1  2 a
+# 2 2  4 b
+# 3 3  6 c
+# 4 4  8 d
+# 5 5 10 e
+
 
 # student 데이터프레임 만들기
 sid <- c('A','B','C','D')
@@ -771,32 +815,95 @@ subject <- c('컴퓨터', '국어국문', '소프트웨어', '유아교육')
 
 student <- data.frame(sid, score, subject)
 student
+#op 
+#    sid score    subject
+# 1   A    90     컴퓨터
+# 2   B    80   국어국문
+# 3   C    70 소프트웨어
+# 4   D    60   유아교육
 
 # 자료형과 자료구조 보기
 mode(student); class(student) # list, data.frame
 str(sid); str(score); str(subject)
+#op
+# chr [1:4] "A" "B" "C" "D"
+# num [1:4] 90 80 70 60
+# chr [1:4] "컴퓨터" "국어국문" "소프트웨어" "유아교육"
 str(student)
+#op
+# 'data.frame':	4 obs. of  3 variables:
+#   $ sid    : chr  "A" "B" "C" "D"
+# $ score  : num  90 80 70 60
+# $ subject: chr  "컴퓨터" "국어국문" "소프트웨어" "유아교육"
 
 # 두 개 이상의 데이터프레임 병합하기
 height <- data.frame(id=c(1,2), h=c(180, 175))
 weight <- data.frame(id=c(1,2), w=c(80,75))
 height; weight
+# op 
+#   id   h
+# 1  1 180
+# 2  2 175
+#   id  w
+# 1  1 80
+# 2  2 75
 
-person <- merge()
+person <- merge(height, weight, by.x = "id",by.y = "id")
 person
+#op 
+#    id   h  w
+# 1  1 180 80
+# 2  2 175 75
 
 
 # galton 데이터 셋 가져오기
 install.packages("UsingR") # 패키지 설치
 library(UsingR) # 패키지 메모리에 로드
 data("galton") # galton 데이터 셋 가져오기
+View(galton)
 
 # galton 데이터 셋 구조 보기
 str(galton)
-dim(galton)
-head(galton, 20)
-head(galton) # default 갯수:6
+#op
+# 'data.frame':	928 obs. of  2 variables:
+#   $ child : num  61.7 61.7 61.7 61.7 61.7 62.2 62.2 62.2 62.2 62.2 ...
+# $ parent: num  70.5 68.5 65.5 64.5 64 67.5 67.5 67.5 66.5 66.5 ...
 
+dim(galton)
+#op -> [1] 928   2
+
+head(galton, 10)
+#op
+#    child parent
+# 1   61.7   70.5
+# 2   61.7   68.5
+# 3   61.7   65.5
+# 4   61.7   64.5
+# 5   61.7   64.0
+# 6   62.2   67.5
+# 7   62.2   67.5
+# 8   62.2   67.5
+# 9   62.2   66.5
+# 10  62.2   66.5
+
+head(galton) # default 갯수:6
+#op
+#   child parent
+# 1  61.7   70.5
+# 2  61.7   68.5
+# 3  61.7   65.5
+# 4  61.7   64.5
+# 5  61.7   64.0
+# 6  62.2   67.5
+tail(galton)
+#op 뒤에서 부터 6개
+#     child parent
+# 923  73.7   70.5
+# 924  73.7   69.5
+# 925  73.7   69.5
+# 926  73.7   69.5
+# 927  73.7   69.5
+# 928  73.7   69.5
 
 ## 6. 문자열 처리
 
@@ -805,46 +912,100 @@ install.packages("stringr") # 패키지 설치
 library(stringr) # 메모리 로딩
 
 # 형식) str_extract('문자열', '정규표현식')
-str_extract("홍길동35이순신45강감찬50","")
-str_extract_all("홍길동35이순신45강감찬50","")
-
+str_extract("홍길동35이순신45강감찬50","[0-9]{2}")
+# op -> [1] "35"
+str_extract_all("홍길동35이순신45강감찬50","[0-9]{2}")
+# op -> [1] "35" "45" "50"
 
 # 반복수를 지정하여 영문자 추출
 string <- 'hongkildong105lee1002you25강감찬2005'
-str_extract_all(string, '')
-str_extract_all(string, '')
-str_extract_all(string, '')
+str_extract_all(string, '[a-z]{3}') #3자 연속된 알파벳 추출
+#op 
+# [[1]]
+# [1] "hon" "gki" "ldo" "lee" "you"
+str_extract_all(string, '[a-z]{3,}') #3글자 이상 연속된 알파벳 추출
+#op  -> [1] "hongkildong" "lee"         "you" 
+str_extract_all(string, '[a-z]{3,5}') #3~5글자 연속된 알파벳 추출
+# op 
+# [[1]]
+# [1] "hongk" "ildon" "lee"   "you"  
+
 
 # 특정 단어 추출
 str_extract_all(string, '유관순')
+#op
+# [[1]]
+# character(0)
 str_extract_all(string, '강감찬')
-
+#op
+# [[1]]
+# [1] "강감찬"
 
 # 한글, 영문자, 숫자 추출하기
 str_extract_all(string, 'hong')
+#op
+# [[1]]
+# [1] "hong"
 str_extract_all(string, '25')
-str_extract_all(string, '') # 한글 검색
-str_extract_all(string, '') # 소문자 검색
-str_extract_all(string, '') # 대문자 검색
-str_extract_all(string, '') # 숫자 검색
-
+#op
+# [[1]]
+# [1] "25"
+str_extract_all(string, '[가-힣]{3}') # 한글 검색
+#op
+# [[1]]
+# [1] "강감찬"
+str_extract_all(string, '[a-z]{3}') # 소문자 검색
+#op
+# [[1]]
+# [1] "hon" "gki" "ldo" "lee" "you"
+str_extract_all(string, '[A-Z]{3}') # 대문자 검색
+#op
+# [[1]]
+# character(0)
+str_extract_all(string, '[0-9]{4}') # 숫자 검색
+#op
+# [[1]]
+# [1] "1002" "2005"
 
 # 한글, 영문자, 숫자를 제외한 나머지 추출하기
-str_extract_all(string, '')
-str_extract_all(string, '')
-str_extract_all(string, '')
-str_extract_all(string, '')
-
+str_extract_all(string, '[^a-z]')
+#op
+# [[1]]
+# [1] "1"  "0"  "5"  "1"  "0"  "0"  "2"  "2"  "5"  "강" "감" "찬" "2"  "0"  "0"  "5" 
+str_extract_all(string, '[^a-z]{4}')
+#op
+# [[1]]
+# [1] "1002"   "25강감" "찬200"
+str_extract_all(string, '[^가-힣]{5}')
+#op
+# [[1]]
+# [1] "hongk" "ildon" "g105l" "ee100" "2you2"
+str_extract_all(string, '[^0-9]{3}')
+#op
+# [[1]]
+# [1] "hon"    "gki"    "ldo"    "lee"    "you"    "강감찬"
 
 # 주민등록번호 검사하기
 jumin <- '123456-3234567'
-str_extract_all(jumin, '')
-str_extract_all(jumin, '')
+str_extract_all(jumin, '[0-9]{6}-[1234][0-9]{6}')
+#op
+# [[1]]
+# [1] "123456-3234567"
+str_extract_all(jumin, '\\d{6}-[1234]\\d{6}') #\d는 숫자라는 의미, \\가 되는 이유는 \를 인식시키기 위해
+#op
+# [[1]]
+# [1] "123456-3234567"
 
 # 지정된 길이의 단어 추출하기
 name <- '홍길동1234,이순신5678,강감찬1012'
-str_extract_all(name, '') 
-str_extract_all(name, '')
+str_extract_all(name, '\\w{7,}')  #\w : 특수문자만 제외, 
+# op 
+# [[1]]
+# [1] "홍길동1234" "이순신5678" "강감찬1012"
+str_extract_all(name, '\\W') #\W : 특수문자만 선택,  
+# op
+# [[1]]
+# [1] "," ","
 
 # 문자열 위치(index) 구하기
 string <- 'hongkd105leess1002you25강감찬2005'
@@ -858,34 +1019,41 @@ len
 # 부분 문자열
 string_sub <- str_sub(string, 1, len-7)
 string_sub
-
+# op->[1] "hongkild105lee1002you25"
 string_sub <- str_sub(string, 1, 23)
 string_sub
+# op->[1] "hongkild105lee1002you25"
 
 # 대문자, 소문자 변경하기
 str_to_upper(string_sub)
+# op-> [1] "HONGKILD105LEE1002YOU25"
 str_to_lower(string_sub)
+# op-> [1] "hongkild105lee1002you25"
 
 # 문자열 교체하기
 string_rep <- str_replace(string_sub, 'hongkild105', '홍길동35,')
 string_rep <- str_replace(string_rep, 'lee1002', '이순신45,')
 string_rep <- str_replace(string_rep, 'you25', '유관순25,')
 string_rep
-
+#op -> [1] "홍길동35,이순신45,유관순25,"
 
 # 문자열 결합하기
 string_c <- str_c(string_rep, '강감찬55')
 string_c
-
+#op ->[1] "홍길동35,이순신45,유관순25,강감찬55"
 
 # 문자열 분리하기
 string_sp <- str_split(string_c, ',')
 string_sp
+#op ->
+# [[1]]
+# [1] "홍길동35" "이순신45" "유관순25" "강감찬55"
 
 # 문자열 합치기
 string_vec <- c('홍길동35', '이순신45', '유관순25', '강감찬55')
 string_vec
+#op -> [1] "홍길동35" "이순신45" "유관순25" "강감찬55"
 
 string_join <- paste(string_vec, collapse = ',')
 string_join
-
+#op -> [1] "홍길동35,이순신45,유관순25,강감찬55"
