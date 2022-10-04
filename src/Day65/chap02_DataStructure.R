@@ -678,33 +678,68 @@ class(memp)
 
 # txt 파일 이용 객체 생성
 getwd()
-setwd("C:/workspaces/Rwork/data")
+setwd("C:/workspaces/RLAB/data")
 
-txtemp <- 
-txtemp
+txtemp <- read.table('emp.txt', header = T, sep = "") 
+#컬럼에 이름이 있으면 header를 T로, 데이터에 여백이 있으면 seq=""
+txtemp 
+#op
+#   사번 이름 급여
+# 1  101 hong  150
+# 2  201  lee  250
+# 3  301  kim  300
 class(txtemp)
+#op ->[1] "data.frame"
 
 
 # csv 파일 이용 객체 생성(header=T)
-csvtemp 
+csvtemp <- read.csv('emp.csv', header = T)
 csvtemp; class(csvtemp)
+#op
+#    no   name pay
+# 1 101 홍길동 150
+# 2 102 이순신 450
+# 3 103 강감찬 500
+# 4 104 유관순 350
+# 5 105 김유신 400
+# [1] "data.frame"
 
 
 # csv 파일 이용 객체 생성(header=F)
-name <- c("사번", "이름", "급여")
-csvtemp2 <- 
+name <- c("사번", "이름", "급여") # 컬럼에 이름 부여
+csvtemp2 <- read.csv('emp2.csv',header = F, col.names = name)
 csvtemp2
+#op -> header에 대한 정보가 없을 시 삽입가능.
+#    사번   이름 급여
+# 1  101 홍길동  150
+# 2  102 이순신  450
+# 3  103 강감찬  500
+# 4  104 유관순  350
+# 5  105 김유신  400
 
 
 # 데이터프레임 만들기
-df <- 
+df <- data.frame(x=c(1:5), y=seq(2,10,2), z=c('a','b','c','d','e'))
 df
+#op
+#   x  y z
+# 1 1  2 a
+# 2 2  4 b
+# 3 3  6 c
+# 4 4  8 d
+# 5 5 10 e
 
 # 데이터프레임 컬럼명 참조
 df$x
+#op -> [1] 1 2 3 4 5
 
 # 자료구조, 열수, 행수, 컬럼명 보기
 str(df)
+#op 
+# 'data.frame':	5 obs. of  3 variables:
+#   $ x: int  1 2 3 4 5
+# $ y: num  2 4 6 8 10
+# $ z: chr  "a" "b" "c" "d" ...
 ncol(df)
 nrow(df)
 df[c(2:3)]
