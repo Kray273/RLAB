@@ -12,7 +12,7 @@ Day 65 https://www.notion.so/Day65_-Data-Frame-17fe791b7b9b4805ab1674f77648fb62
 
 Day 66 https://www.notion.so/Day66_-96638d5f3efb434f9a45ac4ed2cc0f70
 
-Day 67
+Day 67 https://www.notion.so/Day67_-eca075efa1a2455dbbeb349c1fc09c72
 
 Day 68
 
