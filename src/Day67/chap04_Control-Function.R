@@ -38,6 +38,7 @@ boolean
 boolean <- num1 != num2 # 두 변수의 값이 다른지 비교
 boolean
 
+
 # (2) 크기비교
 boolean <- num1 > num2
 boolean
@@ -68,7 +69,7 @@ logical
 
 
 ###############################
-## 2. 조건문
+## 2. 조건문                 
 ###############################
 
 # 1) if()
@@ -113,7 +114,7 @@ print(result)
 
 
 # 2) ifelse(조건, 참, 거짓) - 3항 연산자 기능
-
+# Java에서 3항 연산자는 (boolean)? true:false;
 score <- c(78, 95, 85, 65)
 score
 ifelse(score >= 80, "우수", "노력")
@@ -121,13 +122,14 @@ ifelse(score >= 80, "우수", "노력")
 
 # ifelse() 응용
 getwd()
-setwd("C:/workspaces/Rwork/data")
+setwd("C:/workspace/Rwork/data")
 
 excel <- read.csv("excel.csv", header = T)
 excel
+View(excel)
 
 q1 <- excel$q1 # q1 변수값 추출
-ifelse(q1 >= 3, sqrt(q1), q1) # 3보다 큰 경우 sqrt() 함수 적용.
+ifelse(q1 >= 3, sqrt(q1), q1) # 3보다 큰 경우 sqrt() 함수 적용. 루트를 씌어 실수형 반환
 ifelse(q1 >= 2 & q1 <= 4, q1^2, q1)
 
 # 3) switch문
@@ -179,13 +181,13 @@ for(n in i){ # 10회 반복
 d
 
 for(n in i){
-  if(n %% 2 != 0){
+  if(n %% 2 != 0){ #나머지값이 0이 아닌경우
     print(n) # %% : 나머지 값 - 홀수만 출력.
   }
 }
 
 for(n in i){
-  if(n %% 2 == 0){
+  if(n %% 2 == 0){ #나머지 값이 0인 경우 
     next # 다음 문장 skip -> 반복문 계속(자바의 continue 키워드와 동일.)
   }else{
     print(n) # %% : 나머지 값 - 홀수만 출력.
@@ -229,7 +231,7 @@ while(i < 10){
 # 매개변수가 없는 함수 예
 f1 <- function(){
           cat("매개변수가 없는 함수")
-      }
+      } #함수를 정의할 뿐! 
 
 f1() # 함수 호출 방법
 
@@ -256,7 +258,7 @@ add
 # 기술 통계량을 계산하는 함수 정의
 # 파일 불러오기
 getwd()
-setwd("C:/workspaces/Rwork/data")
+setwd("C:/workspaces/RLAB/data")
 
 test <- read.csv("test.csv", header = T)
 head(test)
