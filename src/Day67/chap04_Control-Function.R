@@ -381,7 +381,7 @@ range(vec)
 mean(vec)
 median(vec)
 sum(vec)
-var(vec)
+var(vec) #분산 값
 sd(vec) # 표준편차 구하기.
 table(vec)    # 빈도수
 
@@ -418,8 +418,8 @@ rnorm(5, mean=0, sd=1)
 vec <- 1:10
 prod(vec) # 벡터 원소들의 곱
 factorial(5)
-abs(-5)
-sqrt(16)
+abs(-5) # 절대값
+sqrt(16) # 루트
 
 log(10) # 10의 자연로그(밑수가 e)
 log10(10) # 10의 일반로그(밑수가 10)
@@ -430,6 +430,6 @@ y <- c(3, 7, 8)
 
 union(x, y) # 합집합
 setequal(x, y) # 동일성 체크
-intersect (x, y) # 집합x와y의교집합
-setdiff(x, y)# x의모든원소중y에는없는x와y의차집합
+intersect (x, y) # 집합x와y의 교집합
+setdiff(x, y)# x의모든원소중y에는없는x와y의 차집합
 
