@@ -172,12 +172,14 @@ summary(iris$Sepal.Width)
 hist(iris$Sepal.Width, xlab = "꽃받침의 너비",
      col="green", xlim=c(2.0, 4.5),
      main="iris 꽃받침 너비 histogram")
+#사진3. 
 
 summary(iris$Sepal.Length)
 
 hist(iris$Sepal.Length, xlab = "꽃받침의 길이",
      col="mistyrose", xlim=c(4.0, 8.0),
-     main="iris 꽃받침 너비 histogram")
+     main="iris 꽃받침 길이 histogram")
+#사진4. 
 
 # 확률 밀도로 히스토그램 그리기 - 연속형변수의 확률.
 hist(iris$Sepal.Width, xlab = "꽃받침 너비",
