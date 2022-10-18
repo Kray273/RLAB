@@ -185,9 +185,11 @@ hist(iris$Sepal.Length, xlab = "꽃받침의 길이",
 hist(iris$Sepal.Width, xlab = "꽃받침 너비",
      col="mistyrose", xlim=c(2.0, 4.5),
      main="iris 꽃받침 너비 histgram", freq=F)
+#사진5.
 
 # 밀도를 기준으로 line을 그려준다.
 lines(density(iris$Sepal.Width), col="red")
+#사진 6.
 
 # 정규분포곡선 추가
 # - 분포곡선:빈도수의 값을 선으로 연결하여 얻어진 곡선.
@@ -196,23 +198,27 @@ x
 
 curve(dnorm(x, mean=mean(iris$Sepal.Width), sd=sd(iris$Sepal.Width)),
       col="blue", add=T)
-
+#사진 7.
 
 #  3) 산점도 시각화
 #    - 두 개 이상의 변수들 사이의 분포를 점으로 표시한 차트를 의미.
 
 # 기본 산점도 시각화
 price <- runif(10, min = 1, max = 100) # 1~100 사이의 10개 난수 발생.
+price
 plot(price)
+#사진 8.
 
 # 대각선 추가
 par(new=T) # 차트 추가
 line_chart <- c(1:100)
 line_chart
 plot(line_chart, type = "l", col="red", axes = F, ann = F)
+#사진 9.
 
 # 텍스트 추가
 text(70, 80, "대각선 추가", col="blue")
+#사진 10.
 
 # type 속성으로 그리기
 par(mfrow=c(2,2)) # 2행 2열 차트 그리기
@@ -220,15 +226,17 @@ plot(price, type = "l") # 유형:실선
 plot(price, type = "o") # 유형:원형과 실선(원형통과)
 plot(price, type = "h") # 유형:직선
 plot(price, type = "s") # 유형:꺽은선
+#사진 11.
 
 # pch 속성으로 그리기
 plot(price, type="o", pch=5) # 빈 사각형
 plot(price, type="o", pch=15) # 채워진 사각형
 plot(price, type="o", pch=20) # 채워진 원형
 plot(price, type="o", pch=20, col="blue")
+#사진 12.
 plot(price, type="o", pch=20, col="orange", cex=3.0)
 plot(price, type="o", pch=20, col="orange", cex=3.0, lwd=3) # lwd:line width
-
+#사진 13.
 
 #  4) 중첩 자료 시각화
 # 중복된 자료의 수 만큼 점의 크기 확대하기
