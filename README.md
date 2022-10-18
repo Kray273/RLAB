@@ -18,7 +18,7 @@ Day 68 https://www.notion.so/Day68_-b1472a2d789548eb8a306614dae9847d
 
 Day 69 https://www.notion.so/Day69_-1ed9a4eaf6d846dd9bf13dcb10252c14
 
-Day 70
+Day 70 https://www.notion.so/Day70_EDA-acfbefa1e70e4f8bbc6bf463a906f2ae
 
 Day 71
 
