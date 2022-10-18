@@ -191,7 +191,7 @@ mean(dataset2$survey2, na.rm = T) # 3.358566
 
 # 5.1 범주형 vs 범주형
 getwd()
-setwd("C:/workspaces/Rwork/data")
+setwd("C:/workspaces/RLAB/data")
 new_data <- read.csv("new_data.csv", header = T)
 View(new_data)
 
@@ -205,6 +205,7 @@ barplot(resident_gender, beside = T, horiz = F,
         col=rainbow(5),
         legend=row.names(resident_gender),
         main="성별에 따른 거주지역 분포 현황")
+#사진1. 
 
 ## 거주지역에 따른 성별 분포 현황
 gender_resident <- table(new_data$gender2, new_data$resident2)
@@ -268,7 +269,7 @@ xyplot(price ~ age|factor(gender2), data=new_data)
 
 # 데이터 파일 가져오기
 getwd()
-setwd("C:/workspaces/Rwork/src/data")
+setwd("C:/workspaces/RLAB/data")
 
 user_data <- read.csv('user_data.csv', header = T)
 View(user_data)
@@ -285,6 +286,7 @@ head(house_type2, 10)
 
 # 파생변수 추가
 user_data$house_type2 <- house_type2
+# 사진1.
 
 
 # 6.2 1:N -> 1:1 관계로 파생변수 생성
@@ -299,17 +301,21 @@ table(pay_data$product_type)
 # 55  82  89 104  70
 
 # 고객별 상품유형에 따른 구매금액 합계 파생변수 생성
+install.packages("reshape2")
 library(reshape2) # 구조 변경을 위한 패키지 로딩.
 product_price <- dcast(pay_data,user_id ~ product_type, sum, na.rm=T)
 View(product_price)
+#사진2. 
 
 # 컬럼명 수정
 names(product_price) <- c('user_id', '식료품(1)', '생필품(2)', '의류(3)', '잡화(4)', '기타(5)')
 head(product_price) # 컬럼명 수정 확인.
+#사진 3.
 
 # 고객별 지불유형에 따른 구매상품 개수 파생변수 생성
 pay_price <- dcast(pay_data,user_id ~ pay_method, length)
 View(pay_price)
+#사진4.
 
 # 6.3 파생변수 합치기
 
@@ -318,10 +324,12 @@ install.packages("plyr")
 library(plyr)
 user_pay_data <- join(user_data, product_price, by='user_id')
 View(user_pay_data)
+#사진1.
 
-# 병합(위에 결과)된 데이터를 대상으로 고객별 지불 유형에 다른 구매상품 개수 병합하기
+# 병합(위에 결과)된 데이터를 대상으로 고객별 지불 유형에 따른 구매상품 개수 병합하기
 user_pay_data <- join(user_pay_data, pay_price, by='user_id')
 View(user_pay_data)
+#사진2.
 
 
 # 7. 표본 샘플링
@@ -333,6 +341,7 @@ write.csv(user_pay_data, "cleanData.csv", quote = F, row.names = F)
 
 data <- read.csv("cleanData.csv", header = T)
 View(data)
+#사진1.
 
 # 7.2 표본 샘플링
 
