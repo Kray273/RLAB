@@ -11,7 +11,7 @@
 # 변수 리코딩과 데이터프레임 생성
 
 # 1) 실습 파일 가져오기
-data <- read.csv("C:/workspaces/Rwork/data/cleanDescriptive.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/cleanDescriptive.csv", header = T)
 View(data)
 head(data) # 변수 확인
 
@@ -107,7 +107,7 @@ chisq.test(x$관측도수)
 # 연구가설(H1):부모의 학력 수준과 자녀의 대학 진학 여부는 관련성이 있다.
 
 
-data <- read.csv("C:/workspaces/Rwork/src/data/cleanDescriptive.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/cleanDescriptive.csv", header = T)
 
 # 독립변수(x) = 설명변수, 종속변수(y) = 반응 변수 생성
 x <- data$level2 # 부모의 학력수준
@@ -124,7 +124,7 @@ CrossTable(x, y, chisq = T)
 # 연구가설:교육방법에 따라 만족도에 차이가 있다.
 
 # 1. 파일 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/homogenity.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/homogenity.csv", header = T)
 View(data)
 
 table(data$method) # 교육방법
@@ -157,6 +157,7 @@ table(data$method2, data$survey2) # 교차표 생성 -> table(행, 열)
 #방법1           5       8      15        16             6
 #방법2           8      14      11        11             6
 #방법3           8       7      11        15             9
+View(data)
 
 # 4. 교차분할표 생성
 CrossTable(data$method2, data$survey2, chisq = T)
