@@ -65,9 +65,10 @@ sd(score1)     # [1] 4.32435
 # 3) 제곱평균 : 각 값의 제곱의 평균을 구한 후 루트를 적용해서 구하는 평균.
 
 # 4) 조화평균 : 주로 평균 속도를 구할 때 사용하는 방법.
-#   ex) 서울에서 강원도로 휴가는 가는데 갈 때는 안 막혀서 시속 100km로 갔는데, 올 때는 너무 막혀서 시속 60km였다면 왕복 평균 속력은 얼마일까요?
-#   ans) 조화 평균의 식 : 2xy / (x+y) = 2(100*60) / (100+60)
-
+#   ex) 서울에서 강원도로 휴가를 가는데 갈 때는 안 막혀서 시속 100km로 갔는데, 올 때는 너무 막혀서 시속 60km였다면 왕복 평균 속력은 얼마일까요?
+#   ans) 조화 평균의 식 : 2xy / (x+y) = 2(100*60) / (100+60) = 75
+end <- 2*(100*60) / (100+60);
+end
 
 
 # 표준화와 표준값
@@ -79,7 +80,7 @@ sd(score1)     # [1] 4.32435
 # 2. 척도별 기술 통계량 구하기
 
 # 실습 데이터 셋 가져오기
-data <- read.csv("c:/workspaces/Rwork/src/data/descriptive.csv", header = T)
+data <- read.csv("c:/workspaces/RLAB/data/descriptive.csv", header = T)
 View(data)
 
 # 데이터 특성 보기
@@ -101,8 +102,10 @@ data <- subset(data, data$gender==1 | data$gender==2) # 성별 outlier 제거.
 x <- table(data$gender) # 성별에 대한 빈도 수 저장.
 x
 
-x11()
+x11() # 별도의 시각화 자료를 보는 창을 띄움
+#사진1
 barplot(x) # 범주형(명목/서열 척도) 시각화 -> 막대차트
+#사진2
 
 # 구성비율 계산
 prop.table(x) # 비율계산: 0 < x < 1 사이의 값
@@ -125,6 +128,7 @@ table(data$level) # 빈도분석 - 의미있음.
 x1 <- table(data$level) # 각 학력수준에 빈도수 저장.
 x11()
 barplot(x1)  # 명목/서열 척도 -> 막대차트
+#사진1.
 
 # 구성비율 계산
 y <- prop.table(x1)
@@ -143,8 +147,11 @@ summary(survey) # 만족도(5점척도)인 경우 의미 있음 -> 2.605(평균)
 x1 <- table(survey) # 빈도 수
 x1
 
+x11()
 hist(survey) # 등간척도 시각화
+#사진1. 
 pie(x1)
+#사진2. 
 
 # 2.4 비율척도 기술 통계량
 
@@ -153,17 +160,21 @@ length(data$cost) # 297
 summary(data$cost) # 요약통계량-의미있음(mean)-8.784, 중위수-3.000
 
 plot(data$cost)
+#사진1. 
 
 # 데이터 정제(이상치 제거)
 data <- subset(data, data$cost >= 2 & data$cost <= 10) # 총점기준
 data
 
+summary(data$cost)
 plot(data$cost)
+#사진2.
 x <- data$cost
 mean(x) # 5.354032
 
 # 평균이 극단치에 영향을 받는 경우 - 중위수(median) 대체
 median(x) # 5.4
+
 
 #  (1) 대표값 구하기
 
@@ -188,7 +199,7 @@ max(x.t) # [1] 18
 
 x.m <- rbind(x.t)
 x.m
-class(x.m) # [1] "matrix"
+class(x.m) # [1] "matrix" "array" 
 str(x.m)
 which(x.m[1, ] == 18) # 1행 전체를 대상으로 18값 찾기.
 # 5
@@ -221,7 +232,9 @@ sd(x) ** 2
 table(data$cost)
 
 hist(data$cost) # 히스토그램 시각화
+#사진3,
 plot(data$cost) # 산점도 시각화
+#사진4. 
 
 # 연속형 변수 범주화
 data$cost2[data$cost >= 2 & data$cost < 4] <- 1
@@ -230,7 +243,9 @@ data$cost2[data$cost >= 7] <- 3
 
 x <- table(data$cost2)
 barplot(x)
+#사진5.
 pie(x)
+#사진6.
 
 
 # 2.5 비대칭도 구하기
@@ -392,7 +407,7 @@ freq(data$pass2)
 #%      56  38.7  5.2
 #%!NA  59.1 40.9
 
-
+View(data)
 # 최종 결론과 관련된 내용은 pdf를 참조.
 
 
