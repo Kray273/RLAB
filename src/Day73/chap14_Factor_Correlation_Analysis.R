@@ -214,7 +214,7 @@ cor(drinking_water_factor_df)
 # 2.2 상관관계 분석 수행
 
 # [실습] 기술 통계량 구하기
-result <- read.csv("C:/workspaces/Rwork/src/data/product.csv", header=TRUE)
+result <- read.csv("C:/workspaces/RLAB/data/product.csv", header=TRUE)
 View(result)
 head(result) # 친밀도 적절성 만족도(등간척도 - 5점 척도)
 
