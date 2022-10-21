@@ -65,7 +65,7 @@ high - X  # 0.0392 = 신뢰구간 상한값 - 표본 평균
 # -귀무가설(H0):기존 2020년도 고객불만율과 2021년도 CS교육 후 불만율에 차이가 없다.
 
 # 단계1. 실습데이터 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/one_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/one_sample.csv", header = T)
 head(data)
 View(data)
 
