@@ -88,26 +88,33 @@ result$scores
 
 # (1) Factor1, Factor2 요인지표 시각화
 plot(result$scores[, c(1:2)], main="Factor1과 Factor2 요인점수 행렬")
+#사진3. 
 text(result$scores[, 1], result$scores[,2],
      labels = name, cex = 0.7, pos = 3, col = "blue")
+#사진4.
 
 # 요인적재량 plotting
 points(result$loadings[, c(1:2)], pch=19, col = "red")
+#사진5.
 text(result$loadings[, 1], result$loadings[,2],
      labels = rownames(result$loadings),
      cex = 0.8, pos = 3, col = "red")
+#사진6.
 
 # (2) Factor1, Factor3 요인지표 시각화
 plot(result$scores[,c(1,3)], main="Factor1과 Factor3 요인점수 행렬")
+#사진7.
 text(result$scores[,1], result$scores[,3],
      labels = name, cex = 0.7, pos = 3, col = "blue")
+#사진8.
 
 # 요인적재량 plotting
 points(result$loadings[,c(1,3)], pch=19, col = "red")
+#사진9.
 text(result$loadings[,1], result$loadings[,3],
      labels = rownames(result$loadings),
      cex = 0.8, pos = 3, col = "red")
-
+#사진10.
 
 # [실습] 3차원 산점도로 요인적재량 시각화
 install.packages("scatterplot3d")
@@ -118,13 +125,14 @@ Factor2 <- result$scores[,2]
 Factor3 <- result$scores[,3]
 # scatterplot3d(밑변, 오른쪽변, 왼쪽변, type='p') # type='p' : 기본산점도 표시
 d3 <- scatterplot3d(Factor1, Factor2, Factor3)
+# 사진11.
 
 # 요인적재량 표시
 loadings1 <- result$loadings[,1]
 loadings2 <- result$loadings[,2]
 loadings3 <- result$loadings[,3]
 d3$points3d(loadings1, loadings2, loadings3, bg='red',pch=21, cex=2, type='h')
-
+#사진12.
 
 # [실습] 요인별 변수 묶기
 # (1) 요인별 과목변수 이용 데이터프레임 생성
@@ -149,8 +157,8 @@ cor(subject_factor_df)
 # (1) 데이터 가져오기
 install.packages('memisc') # spss tool 포맷 파일 읽어오기
 library(memisc)
-#setwd("C:/workspaces/Rwork/src/data/")
-data.spss <- as.data.set(spss.system.file('C:/workspaces/Rwork/src/data/drinking_water.sav', , encoded = 'utf-8'))
+#setwd("C:/workspaces/RLAB/data/")
+data.spss <- as.data.set(spss.system.file('C:/workspaces/RLAB/data/drinking_water.sav', encoded = 'utf-8'))
 data.spss
 View(data.spss)
 
