@@ -221,7 +221,7 @@ head(result) # 친밀도 적절성 만족도(등간척도 - 5점 척도)
 # 기술통계량
 summary(result) # 요약통계량
 
-sd(result$제품_친밀도); sd(result$제품_적절성); sd(result$제품_만족도)
+sd(result$제품_친밀도); sd(result$제품_적절성); sd(result$제품_만족도) #표준편차의 값 확인
 
 
 # [실습] 상관계수(coefficient of correlation) : 두 변량 X,Y 사이의 상관관계 정도를 나타내는 수치(계수)
@@ -229,14 +229,18 @@ cor(result$제품_친밀도, result$제품_적절성) # 0.4992086 -> 다소 높�
 cor(result$제품_친밀도, result$제품_만족도) # 0.467145 -> 다소 높은 양의 상관관계
 
 # [실습] 전체 변수 간 상관계수 보기
+cor(result)
 cor(result, method="pearson")
 
 # [실습] 방향성 있는 색상으로 표현
 install.packages("corrgram")
 library(corrgram)
 corrgram(result) # 색상 적용 - 동일 색상으로 그룹화 표시
+#사진1.
 corrgram(result, upper.panel=panel.conf) # 수치(상관계수) 추가(위쪽)
+#사진2.
 corrgram(result, lower.panel=panel.conf) # 수치(상관계수) 추가(아래쪽)
+#사진3.
 
 # [실습] 차트에 밀도 곡선, 상관성, 유의확률(별표) 추가
 install.packages("PerformanceAnalytics")
@@ -244,6 +248,7 @@ library(PerformanceAnalytics)
 
 # 상관성,p값(*),정규분포 시각화 - 모수 검정 조건
 chart.Correlation(result, histogram=, pch="+")
+#사진4.
 
 # [실습]  spearman : 서열척도 대상 상관계수
 cor(result, method="spearman")
