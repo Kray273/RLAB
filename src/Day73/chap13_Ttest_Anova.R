@@ -109,7 +109,7 @@ binom.test(14, 150, p = 0.2, alternative = "less", conf.level = 0.95) # p-value 
 
 
 # 단계1. 실습 파일 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/one_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/one_sample.csv", header = T)
 head(data)
 str(data)
 
@@ -141,11 +141,13 @@ shapiro.test(x1)
 # 단계5. 정규분포 시각화
 x11()
 hist(x1)
+#사진1. 
 
 # stats 패키지에서 정규성 검정을 위해서 제공되는 시각화 함수.
 qqnorm(x1)
+#사진2.
 qqline(x1, lty=1, col='blue')
-
+#사진3.
 
 # 단계6. 평균차이 검정
 # T-test(T-검정) : 모집단에서 추출한 표본 데이터의 분포형태가 정규분포일 때 수행.
@@ -172,7 +174,7 @@ t.test(x1, mu=5.2, alternative = "less", conf.level = 0.95)
 # -귀무가설(H0):두가지 교육방법에 따라 교육생의 만족율에 차이가 없다.
 
 # 단계1. 실습데이터 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/two_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/two_sample.csv", header = T)
 head(data)
 str(data)
 View(data)
@@ -215,7 +217,7 @@ prop.test(c(110,135), c(150,150), alternative = "less", conf.level = 0.95) # p-v
 # 귀무가설(H0):교육방법에 따른 두 집단 간 실기시험의 평균에 차이가 없다.
 
 # 단계1. 실습파일 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/two_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/two_sample.csv", header = T)
 View(data)
 str(data)
 head(data)
@@ -276,7 +278,7 @@ t.test(a1, b1, alternative = "less", conf.level = 0.95)
 # -귀무가설(H0):교수법 프로그램을 적용하기 전 학생들의 학습력과 교수법 프로그램을 적용한 후 학생들의 학습력에 차이가 없다.
 
 # 단계1. 실습 파일 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/paired_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/paired_sample.csv", header = T)
 head(data) # no before after
 View(data)
 
@@ -322,7 +324,7 @@ t.test(x, y, paired = T, alternative = "greater", conf.level = 0.95)
 
 # 단계1. 파일 가져오기.
 
-data <- read.csv("C:/workspaces/Rwork/src/data/three_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/three_sample.csv", header = T)
 View(data)
 head(data)
 str(data)
@@ -358,7 +360,7 @@ prop.test(c(34,37,39), c(50,50,50), alternative = "two.sided", conf.level = 0.95
 
 # (1) 데이터 전처리
 # 단계1. 파일 가져오기
-data <- read.csv("C:/workspaces/Rwork/src/data/three_sample.csv", header = T)
+data <- read.csv("C:/workspaces/RLAB/data/three_sample.csv", header = T)
 
 # 단계2. 데이터 정제/전처리 - NA 제거
 data <- subset(data, !is.na(score), c(method, score))
@@ -367,7 +369,9 @@ data
 # 단계3. 차트 이용 - outlier 보기(데이터 분포 현황 분석)
 x11()
 plot(data$score) # 차트로 outlier 확인 : 50이상과 음수값
+#사진1.
 barplot(data$score) # 바 차트
+#사진2.
 mean(data$score) #[1] 14.44725
 
 # 단계4. outlier 제거 - 평균(14.44725)
@@ -379,6 +383,7 @@ length(data2$score) # [1] 88
 # 단계5. 정제된 데이터 보기
 x <- data2$score
 boxplot(x)
+#사진3.
 summary(x)
 
 # (2) 세 집단 subset 작성과 기술통계량
@@ -420,3 +425,4 @@ summary(result) # p-value=9.39e-14 : 귀무가설 기각
 # (5) 사후검정
 TukeyHSD(result) # 분산분석의 결과로 사후검정
 plot(TukeyHSD(result))
+#사진4.
