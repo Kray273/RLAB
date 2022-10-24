@@ -220,13 +220,15 @@ tsdata
 # (3) 추세선 시각화(정상성시계열 vs 비정상성시계열)
 x11()
 plot(tsdata, type="l", col='red')
-
+#사진1. 
 
 # 단계2:정상성시계열 변환
 par(mfrow=c(1,2))
 ts.plot(tsdata)
+#사진2.
 diff <- diff(tsdata)
 plot(diff)
+#사진3. 
 
 # 단계3: 모형 식별과 추정
 install.packages('forecast')
@@ -236,7 +238,6 @@ arima <- auto.arima(tsdata) # 시계열 데이터 이용.
 arima
 # ARIMA(1,1,0) - 1번 차분한 결과가 정상성시계열의 AR(1) 모형으로 식별.
 
-
 # 단계4: 모형 생성
 model <- arima(tsdata, order=c(1,1,0))
 model
@@ -245,6 +246,7 @@ model
 # 단계5: 모형 진단(모형 타당성 검정)
 # (1) 자기상관함수에 의한 모형 진단
 tsdiag(model)
+#사진4. 
 
 # (2) Box-Ljung에 의한 잔차항 모형 진단
 Box.test(model$residuals, lag = 1, type = "Ljung")
@@ -257,10 +259,11 @@ fore
 x11()
 par(mfrow=c(1,2))
 plot(fore) # 향후 24개월 예측치 시각화
+#사진5. 
 
 model2 <- forecast(model, h = 6) # 향후 6개월 예측치 시각화
 plot(model2)
-
+#사진6. 
 
 ## 정상성시계열의 계절형
 
@@ -284,12 +287,15 @@ tail(tsdata)
 # (3) 시계열요소분해 시각화
 ts_feature <- stl(tsdata, s.window="periodic")
 plot(ts_feature)
+#사진1. 
 
 # 단계2 : 정상성시계열 변환
 par(mfrow=c(1,2))
 ts.plot(tsdata)
+#사진2. 
 diff <- diff(tsdata)
 plot(diff) # 차분 시각화
+#사진3.
 
 # 단계3 : 모형 식별과 추정
 library(forecast)
@@ -312,6 +318,7 @@ Box.test(model$residuals, lag=1, type = "Ljung") # p-value = 0.5618 / p-value = 
 par(mfrow=c(1,2))
 fore <- forecast(model, h=24) # 2년 예측
 plot(fore)
+#사진5.
 fore2 <- forecast(model, h=6) # 6개월 예측
 plot(fore2)
-
+#사진6.
