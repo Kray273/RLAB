@@ -21,14 +21,16 @@ str(AirPassengers) # Time-Series [1:144] from 1949 to 1961:
 # 단계2:차분(Differencing) 적용-현재 시점에서 이전 시점의 자료를 빼는 연산으로 평균을 정상화하는데 이용 : 평균 정상화.
 x11()
 ts.plot(AirPassengers)
+#사진1. 
 
-par(mfrow=c(1,2))
+par(mfrow=c(1,2)) #화면에 2개의 그래프를 표시. 
 log <- diff(AirPassengers) # 차분 수행
 plot(log) # 평균 정상화
+#사진2.
 
 log <- diff(log(AirPassengers)) # 로그+차분 수행
 plot(log) # 분산 정상화
-
+#사진3.
 
 ############################
 ## 시계열 자료 시각화
@@ -47,6 +49,7 @@ WWWusage
 
 X11()
 ts.plot(WWWusage, type="l", col="red")
+#사진1. 
 
 # 다중 시계열 자료 시각화
 
@@ -64,10 +67,11 @@ head(EuStock)
 # 단계3 : 단일 시계열 데이터 추세선
 X11()
 plot(EuStock$DAX[1:1000], type = "l", col="red") # 선 그래프 시각화
+#사진2.
 
 # 단계4 : 다중 시계열 데이터 추세선
 plot.ts(cbind(EuStock$DAX[1:1000], EuStock$SMI[1:1000]), main="주가지수 추세선")
-
+#사진3.
 
 
 ##########################
@@ -88,24 +92,28 @@ tsdata <- ts(data, start = c(2016, 1), frequency = 12)
 tsdata # 2016~2018
 
 # 단계3 : 추세선 확인
-par(mfrow=c(1,1))
+par(mfrow=c(1,1)) #화면에 하나의 그래프
 ts.plot(tsdata) # plot(tsdata)와 동일함.
+#사진1.
 
 # 단계4 : 시계열 분해- stl():계절요소, 추세, 잔차 모두 제공.
 plot(stl(tsdata, "periodic")) # periodic : 주기
+#사진2. 
 
 # 단계5 : 시계열 분해와 변동 요인 제거
 m <- decompose(tsdata) # decompose()함수 이용 시계열 분해
 attributes(m) # 변수 보기
 plot(m) # 추세요인, 계절요인, 불규칙 요인이 포함된 그래프.
+#사진3.
 plot(tsdata - m$seasonal) # 계절요인을 제거한 그래프.
-
+#사진4.
 
 # 단계6 : 추세요인과 불규칙요인 제거
 x11()
 plot(tsdata - m$trend) # 추세요인 제거 그래프
+#사진5.
 plot(tsdata - m$seasonal - m$trend) # 불규칙 요인만 출력.
-
+#사진6. 
 
 ##################################
 # 자기상관함수/ 부분자기상관함수
@@ -126,10 +134,11 @@ tsdata
 # 단계2 : 자기상관함수 시각화
 x11()
 acf(na.omit(tsdata), main="자기상관함수", col="red")
+#사진1. 
 
 # 단계3 : 부분자기상관함수 시각화
 pacf(na.omit(tsdata), main="부분자기상관함수", col="red")
-
+#사진2.
 
 ##################################
 # 추세 패턴 찾기 시각화
@@ -146,15 +155,15 @@ tsdata <- ts(input, start = c(2015, 2), frequency = 12)
 
 # 단계2 : 추세선 시각
 plot(tsdata, type="l", col="red")
-
+#사진1. 
 
 # 단계3 : 자기상관 함수 시각화
 acf(na.omit(tsdata), main="자기상관함수", col="red")
+#사진2. 
 
 # 단계4 : 차분 시각화
 plot(diff(tsdata, differences=1))
-
-
+#사진3.
 
 ##################################
 # 평활법(Smoothing Method)
@@ -184,9 +193,14 @@ library(TTR)
 # 단계3 : 이동평균법으로 평활 및 시각화
 par(mfrow=c(2,2))
 plot(tsdata, main="원 시계열 자료") # 시계열 자료 시각화
+#사진1.
 plot(SMA(tsdata, n=1), main="1년 단위 이동평균법으로 평활")
+#사진2.
 plot(SMA(tsdata, n=2), main="2년 단위 이동평균법으로 평활")
+#사진3.
 plot(SMA(tsdata, n=3), main="3년 단위 이동평균법으로 평활")
+#사진4.
+
 par(mfrow=c(1,1))
 
 ##################################
