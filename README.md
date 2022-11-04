@@ -27,3 +27,5 @@ Day 72 https://www.notion.so/Day72_-416ae825639d4ba1a5bfce049e670a00
 Day 73 https://www.notion.so/Day73_-af18b89a0cfe461eb71a3feda62f0df8
 
 Day 74 https://www.notion.so/Day74_-5a25adadbb654c4ca3e83dcdaebdeaa2
+
+Day 82 https://www.notion.so/Day82_-R-_-8162d5701aa04764ae44a0630de02b34
