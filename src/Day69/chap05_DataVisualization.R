@@ -21,7 +21,7 @@ length(chart_data)
 chart_data
 
 # 세로 막대 차트　
-help("barplot")
+help("z`")
 help(barplot)
 barplot(chart_data, ylim = c(0, 600), col = rainbow(8), main = "2019년도 vs 2020년도 분기별 매출현황 비교")
 #사진1. 
