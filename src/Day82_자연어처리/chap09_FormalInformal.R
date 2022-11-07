@@ -426,8 +426,8 @@ plot.igraph(ruleg,vertex.label=V(ruleg)$name,
 # 3.2 실시간 뉴스 수집과 분석
 
 #  (1) 패키지 설치 및 준비
-# 실습: 웹 문서 요청과 파싱 관련 패키지 설치 및 로딩
-install.packages("httr")
+# 실습: 웹 문서 요청과 파싱 관련 패키지 설치 및 로딩 -chap03에서 실습해봄.
+install.packages("httr")  
 library(httr)
 install.packages("XML")
 library(XML)
@@ -435,49 +435,52 @@ library(XML)
 
 # 실습: 웹 문서 요청
 url <- "https://news.daum.net"
-web <- GET(url)
+web <- GET(url) # httr에서 제공하는 소스를 추출하는 함수(문자열!)
 web
+# 사진 1. 
 
 # 실습: HTML 파싱하기
 html <- htmlTreeParse(web, useInternalNodes = T, trim = T, encoding = "utf-8")
-rootNode <- xmlRoot(html)
+rootNode <- xmlRoot(html) #최상위 루트에 디렉토리에 데이터셋을 넣는다. 
 html
+# 사진2.
 
 # 실습: 태그 자료 수집하기
 news <- xpathSApply(rootNode, "//a[@class = 'link_txt']", xmlValue)
-news
+news # 자료를 보고 토픽분석을 위해 반복된 신조어나 필요한 단어가 있는지 확인
+# 사진3. 
 
 
 # 실습: 자료 전처리하기
 # 단계 1: 자료 전처리 - 수집한 문서를 대상으로 불용어 제거
-news_pre <- gsub("[\r\n\t]", ' ', news)
-news_pre <- gsub('[[:punct:]]', ' ', news_pre)
-news_pre <- gsub('[[:cntrl:]]', ' ', news_pre)
-# news_pre <- gsub('\\d+', ' ', news_pre)   # corona19(covid19) 때문에 숫자 제거 생략
-news_pre <- gsub('[a-z]+', ' ', news_pre)
+news_pre <- gsub("[\r\n\t]", ' ', news) # \r 은 왼쪽으로, \n은 줄바꿈, \t는 Tab
+news_pre <- gsub('[[:punct:]]', ' ', news_pre) #문장부호 제거
+news_pre <- gsub('[[:cntrl:]]', ' ', news_pre) # 제어문자 제거
+news_pre <- gsub('\\d+', ' ', news_pre)   # corona19(covid19) 때문에 숫자 제거 생략, 일반적으로 제거
+news_pre <- gsub('[a-z]+', ' ', news_pre) # 영문 제거 한글키워드만 뽑기위해서.. 
 news_pre <- gsub('[A-Z]+', ' ', news_pre)
-news_pre <- gsub('\\s+', ' ', news_pre)
+news_pre <- gsub('\\s+', ' ', news_pre) # 2개 이상의 여백을 제거. 
 
-news_pre
+news_pre #사진 1. 
 
 # 단계 2: 기사와 관계 없는 'TODAY', '검색어 순위' 등의 내용은 제거
 news_data <- news_pre[1:32] # 검색수 만큼 변경 
-news_data
+news_data # 사진2. 
 
 
 # 실습: 수집한 자료를 파일로 저장하고 읽기
-write.csv(news_data, "C:/workspaces/Rwork/output/news_data.csv", quote = F)
-
-news_data <- read.csv("C:/workspaces/Rwork/output/news_data.csv", header = T, stringsAsFactors = F)
-str(news_data)
+write.csv(news_data, "C:/workspaces/RLAB/outputs/news_data.csv", quote = F) # 저장_사진1. 
+news_data <- read.csv("C:/workspaces/RLAB/outputs/news_data.csv", header = T, stringsAsFactors = F) #읽어오기
+str(news_data) # 사진2. 
 
 names(news_data) <- c("no", "news_text")
-head(news_data)
+head(news_data) #사진3.
 
 news_text <- news_data$news_text
-news_text
+news_text # 사진4.
 
 # 실습: 세종 사전에 단어 추가
+library(KoNLP)
 user_dic <- data.frame(term = c("이태원역", "탄도미사일", "이태원"), tag = 'ncn')
 buildDictionary(ext_dic = 'sejong', user_dic = user_dic)
 
@@ -487,29 +490,31 @@ exNouns <- function(x) { paste(extractNoun(x), collapse = " ")}
 
 # 단계 2: exNouns()  함수를 이용하어 단어 추출
 news_nouns <- sapply(news_text, exNouns)
-news_nouns
+news_nouns #사진1. 
 
 # 단계 3: 추출 결과 확인
-str(news_nouns)
+str(news_nouns) #사진2.
 
 # 실습: 말뭉치 생성과 집계 행렬 만들기
 # 단계 1: 추출된 단어를 이용한 말뭉치(corpus) 생성
+# install.packages('tm')
+library(tm)
 newsCorpus <- Corpus(VectorSource(news_nouns))
 newsCorpus
 #<<SimpleCorpus>>
 #Metadata:  corpus specific: 1, document level (indexed): 0
 #Content:  documents: 32
-inspect(newsCorpus)
+inspect(newsCorpus) #사진1. 데이터를 확인하고 싶을 때! 
 
 # 단계 2: 단어 vs 문서 집계 행렬 만들기
 # 한글 2~8 음절 단어 대상 단어/문서 집계 행렬 
-TDM <- TermDocumentMatrix(newsCorpus, control = list(wordLengths = c(4, 16)))
-TDM
+TDM <- TermDocumentMatrix(newsCorpus, control = list(wordLengths = c(4, 16))) 
+TDM # 사진2. 
 
 # 단계 3: matrix 자료구조를 data.frame 자료구조로 변경
 tdm.df <- as.data.frame(as.matrix(TDM))
 dim(tdm.df)
-
+# [1] 177  32
 
 # 실습: 단어 출현 빈도수 구하기
 wordResult <- sort(rowSums(tdm.df), decreasing = TRUE)
@@ -520,19 +525,26 @@ wordResult[1:10]
 # 단계 1: 패키지 로딩과 단어 이름 추출
 library(wordcloud)
 myNames <- names(wordResult)
-myNames
+myNames #사진1. 
 
 
 # 단계 2: 단어와 단어 빈도수 구하기
 df <- data.frame(word = myNames, freq = wordResult)
 head(df)
+#          word freq
+# 대통령 대통령    5
+# 국민     국민    3
+# 책임     책임    3
+# 미안     미안    2
+# 죄송     죄송    2
+# 책임자 책임자    2
 
 # 단계 3: 단어 구름 생성
 pal <- brewer.pal(12, "Paired")
 x11()
-wordcloud(df$word, df$freq, min.freq = 2,
+wordcloud(df$word, df$freq, min.freq = 1,
           random.order = F, scale = c(4, 0.7),
-          rot.per = .1, colors = pal)
+          rot.per = .1, colors = pal) #사진2.
 
 
 
